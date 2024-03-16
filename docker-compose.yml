@@ -1,0 +1,54 @@
+version: '3.5'
+
+services:
+  backend:
+    container_name: tq-backend
+    build: ./backend
+    command:
+      bash -c "chmod +x wait_for_databases.sh
+      && ./wait_for_databases.sh
+      && python manage.py collectstatic --noinput
+      && python manage.py migrate --noinput
+      && python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .dev_env
+    image: task_queue_backend
+    restart: always
+    stdin_open: true
+    depends_on:
+      - db
+    tty: true
+    volumes:
+      - ./backend:/backend:cached
+      - static-files:/backend/static
+      - media-files:/backend/media
+
+  db:
+    container_name: tq-database
+    env_file:
+      - .dev_env
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+
+  nginx:
+    container_name: tq-nginx
+    build: ./nginx/local
+    image: task_queue_nginx
+    depends_on:
+      - backend
+    environment:
+      - PROD=0
+    ports:
+      - 8001:8001
+    restart: always
+    volumes:
+      - static-files:/static
+      - media-files:/media
+
+volumes:
+  static-files:
+  media-files:
+  db_volume:
+
