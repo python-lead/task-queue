@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "task-queue"
+version = "0.1.0"
+description = ""
+authors = ["Dawid <rygula.dawid@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ipython = "^8.22.2"
+isort = {extras = ["black"], version = "^5.13.2"}
+
+[tool.poetry.group.dev.dependencies]
+django = "4.2"
+black = "^24.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
