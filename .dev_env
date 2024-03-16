@@ -1,0 +1,13 @@
+#Environment:
+APP_ENVIRONMENT=development
+
+#Django:
+DJANGO_SETTINGS_MODULE=src.settings
+DJANGO_SECRET_KEY=kls9mg)-=c2=15^o&hss+i&d!-c8-fsj_c5=hw-0^bzq6c&u*%
+
+# Database:
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=pass
+POSTGRES_HOST=tq-database
+POSTGRES_PORT=5432
