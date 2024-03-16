@@ -13,7 +13,7 @@ exec-backend:
 	docker exec -it tq-backend bash
 
 clean:
-	isort --profile black backend/src/ && black backend/src/
+	docker exec tq-backend bash -c "isort --profile black src/ && black src/"
 
 load-local-fixtures:
 	docker exec tq-backend bash -c "./manage.py loaddata $(DEVELOPMENT-FIXTURES)"
