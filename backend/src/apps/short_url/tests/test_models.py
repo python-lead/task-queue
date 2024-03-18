@@ -1,8 +1,7 @@
 from unittest import mock
 
-from rest_framework.test import APITestCase
-
 from django.db.utils import IntegrityError
+from rest_framework.test import APITestCase
 
 from src.apps.short_url.models import ShortURL
 from src.apps.short_url.tests.factories import ShortURLFactory
@@ -16,10 +15,7 @@ class ShortURLTestCase(APITestCase):
 
     def setUp(self):
         self.short_url = ShortURLFactory()
-        self.valid_data = {
-            "name": "Name",
-            "url": "https://example.com/"
-        }
+        self.valid_data = {"name": "Name", "url": "https://example.com/"}
 
     def test_save_valid_instance(self):
         instance = self.model(**self.valid_data)
