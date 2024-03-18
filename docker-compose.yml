@@ -47,6 +47,31 @@ services:
       - static-files:/static
       - media-files:/media
 
+  celery:
+    container_name: tq-celery
+    build:
+      context: ./backend
+      args:
+        DJANGO_ENV: development
+    restart: always
+    command:
+      bash -c "celery -A src worker -B -l info"
+    env_file:
+      - .dev_env
+    environment:
+      DJANGO_DATABASE_HOST: db
+      DJANGO_DATABASE_PORT: 5432
+    depends_on:
+      - redis
+    volumes:
+      - ./backend:/backend:cached
+
+  redis:
+    container_name: tq-redis
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
 volumes:
   static-files:
   media-files:
