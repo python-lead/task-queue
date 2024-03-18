@@ -1,16 +1,25 @@
 <h1 align="center">
   <br>
   <br>
-  task-queue
+  URL Shortener
   <br>
 </h1>
 
-<h4 align="center">DRF based task queue app</h4>
+<h4 align="center">DRF based URL Shortener app</h4>
 
 ## Table of contents
+* [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Other](#other)
+* 
+## General info
+URL Shortener app based on microservices, REST API and Celery task queue.
+
+## API URLs documentation
+- [Schema yaml download](http://localhost:8001/api/schema/)
+- [API swagger-ui](http://localhost:8001/api/schema/swagger-ui/)
+- [API redoc](http://localhost:8001/api/schema/redoc/)
 
 ## Technologies
 #### Project environment:
