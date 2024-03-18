@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +31,12 @@ ENVIRONMENT = os.environ.get("APP_ENVIRONMENT")
 BACKEND_HOST = os.environ.get("BACKEND_HOST")
 
 ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8001", "http://0.0.0.0:8001"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8001",
+    "http://0.0.0.0:8001",
+    "http://localhost",
+]
+
 
 # Application definition
 
@@ -124,9 +130,10 @@ REDIS_HOST = os.environ["REDIS_HOST"]
 REDIS_PORT = os.environ["REDIS_PORT"]
 
 # CELERY CONFIGURATION
+CELERY_TASK_ALWAYS_EAGER = "test" in sys.argv
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
-CELERY_RESULT_BACKEND = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"

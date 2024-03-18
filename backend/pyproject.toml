@@ -3,7 +3,6 @@ name = "task-queue"
 version = "0.1.0"
 description = ""
 authors = ["Dawid <rygula.dawid@gmail.com>"]
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
