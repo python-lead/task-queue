@@ -9,7 +9,7 @@ from src.apps.short_url.tests.factories import ShortURLFactory
 from src.apps.short_url.views import ShortUrlRedirectViewSet
 
 
-class ShorURLViewSetTestCase(APITestCase):
+class ShortURLViewSetTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.valid_data = {"name": "Name", "url": "https://example.com/"}

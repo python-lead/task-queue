@@ -12,7 +12,7 @@ from src.apps.short_url.tasks import (
 )
 
 
-class ShorURLViewSet(viewsets.ModelViewSet):
+class ShortURLViewSet(viewsets.ModelViewSet):
     queryset = ShortURL.objects.all()
     serializer_class = ShortURLSerializer
     lookup_field = "url_squid"
