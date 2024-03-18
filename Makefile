@@ -1,4 +1,4 @@
-.PHONY: build-dev dev exec-backend clean load-local-fixtures
+.PHONY: build-dev dev exec-backend clean load-local-fixtures test-backend
 
 DEVELOPMENT-FIXTURES=fixtures/development/shortened_urls.json
 
@@ -17,3 +17,6 @@ clean:
 
 load-local-fixtures:
 	docker exec tq-backend bash -c "./manage.py loaddata $(DEVELOPMENT-FIXTURES)"
+
+test-backend:
+	docker exec tq-backend bash -c "./manage.py test"
