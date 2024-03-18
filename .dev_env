@@ -4,6 +4,8 @@ APP_ENVIRONMENT=development
 #Django:
 DJANGO_SETTINGS_MODULE=src.settings
 DJANGO_SECRET_KEY=kls9mg)-=c2=15^o&hss+i&d!-c8-fsj_c5=hw-0^bzq6c&u*%
+SHORT_URL_SQUID_LENGTH=10
+BACKEND_HOST=localhost:8001
 
 # Database:
 POSTGRES_DB=postgres

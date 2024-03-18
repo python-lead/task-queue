@@ -27,6 +27,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = True
 ENVIRONMENT = os.environ.get("APP_ENVIRONMENT")
 
+BACKEND_HOST = os.environ.get("BACKEND_HOST")
+
 ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8001", "http://0.0.0.0:8001"]
 
@@ -174,3 +176,12 @@ MEDIA_ROOT = os.environ.get("MEDIA_ROOT", None) or os.path.join(BASE_DIR, "media
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Short URLs
+
+SHORT_URL_SQUID_LENGTH = (
+    # ShortURL.url_squid.max_length=16
+    int(os.environ["SHORT_URL_SQUID_LENGTH"])
+    if int(os.environ["SHORT_URL_SQUID_LENGTH"]) <= 16
+    else 16
+)
