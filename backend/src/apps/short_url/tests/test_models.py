@@ -37,11 +37,11 @@ class ShortURLTestCase(APITestCase):
 
     @mock.patch("src.apps.short_url.models.get_url_squid")
     def test_save_instance_with_squid_collision(self, get_url_squid_mock):
-        unique_squid = get_url_squid(id=2)
+        unique_squid = get_url_squid(pk=2)
         get_url_squid_mock.side_effect = [self.short_url.url_squid, unique_squid]
 
         instance = self.model(**self.valid_data)
         instance.save()
 
-        get_url_squid_mock.assert_called_with(instance.id)
+        get_url_squid_mock.assert_called_with(pk=instance.id)
         self.assertEqual(instance.url_squid, unique_squid)

@@ -28,8 +28,8 @@ class ShortURL(models.Model):
             self.save()
 
     def _generate_unique_squid(self):
-        squid = get_url_squid(self.id)
+        squid = get_url_squid(pk=self.id)
         while ShortURL.objects.filter(url_squid=squid).exists():
-            squid = get_url_squid(self.id)
+            squid = get_url_squid(pk=self.id)
 
         return squid
