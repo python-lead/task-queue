@@ -17,6 +17,12 @@
 ## General info
 URL Shortener app based on microservices, REST API and Celery task queue.
 
+Supported operations:
+ - Creating shortened urls
+ - Creating shortened urls
+ - Deleting shortened urls
+ - Using shortened url unique squid to redirect user to original path
+
 ## How to use
 URL Shortener app supports creating shortened urls that consist of following data:
 ```
@@ -84,6 +90,9 @@ $ make dev
 
 $ make exec-backend
 # enters backend container shell via bash
+
+$ make test-backend
+# runs backend tests inside container
 
 $ make clean
 # enforce isort and black rules on the backend/src
