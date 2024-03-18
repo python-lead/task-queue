@@ -1,6 +1,6 @@
 .PHONY: build-dev dev exec-backend clean load-local-fixtures
 
-DEVELOPMENT-FIXTURES=fixtures/development/users.json
+DEVELOPMENT-FIXTURES=fixtures/development/shortened_urls.json
 
 
 build-dev:
