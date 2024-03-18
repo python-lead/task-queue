@@ -9,12 +9,39 @@
 
 ## Table of contents
 * [General info](#general-info)
+* [How to use](#how-to-use)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Other](#other)
-* 
+
 ## General info
 URL Shortener app based on microservices, REST API and Celery task queue.
+
+## How to use
+URL Shortener app supports creating shortened urls that consist of following data:
+```
+{
+    "id": <Django instance id>,
+    "name": <Short name>,
+    "url": <Shortened url original path>,
+    "urlSquid": <unique squid>,
+    "createdAt": <Shortened url creation datetime>",
+    "updatedAt": <Shortened url creation datetime>",
+    "shortUrl": <App redirection url>"
+}
+```
+To interact with shortened urls use Django REST framework [API explorer](http://0.0.0.0:8001/api/short-urls/) or available API documentation views.
+
+To create new shortened url use available HTML form or insomnia/postman client.
+
+Accessing the app using valid shortened url `urlSquid` as resource will redirect the user to short url original path.
+i.e. [localhost:8001/gbHJdmfrXB/](localhost:8001/gbHJdmfrXB/) (As long as you've loaded local fixtures).
+
+You can also just copy shortened url `shortUrl` property and use it directly in your browser.
+
+Creating, updating and removing shortened urls is processed using celery worker.
+
+Check [API URLs documentation](API-URLs-documentation) to see all available API endpoints.
 
 ## API URLs documentation
 - [Schema yaml download](http://localhost:8001/api/schema/)
@@ -29,9 +56,12 @@ URL Shortener app based on microservices, REST API and Celery task queue.
 #### Project backend service:
 * Python: 3.11.7
 * Django: ~4.2
+* djangorestframework: ^3.15.0
+* celery: ^5.3.6
 
 #### Databases used:
 * postgresql: 16
+* redis: latest
 
 ## Requirements:
 * Docker: ^24.0.2
@@ -54,6 +84,9 @@ $ make dev
 
 $ make exec-backend
 # enters backend container shell via bash
+
+$ make clean
+# enforce isort and black rules on the backend/src
 ```
 
 ### Loading local development data from fixtures:

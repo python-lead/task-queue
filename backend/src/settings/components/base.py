@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
-import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,18 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ENVIRONMENT = os.environ.get("APP_ENVIRONMENT")
+DEBUG = False
 
 BACKEND_HOST = os.environ.get("BACKEND_HOST")
-
-ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8001",
-    "http://0.0.0.0:8001",
-    "http://localhost",
-]
-
 
 # Application definition
 
@@ -109,34 +99,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "src.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["POSTGRES_DB"],
-        "USER": os.environ["POSTGRES_USER"],
-        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
-        "HOST": os.environ["POSTGRES_HOST"],
-        "CONN_MAX_AGE": 100,
-    }
-}
-
-# REDIS CONFIGURATION
-REDIS_HOST = os.environ["REDIS_HOST"]
-REDIS_PORT = os.environ["REDIS_PORT"]
-
-# CELERY CONFIGURATION
-CELERY_TASK_ALWAYS_EAGER = "test" in sys.argv
-CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
-CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
-CELERY_ACCEPT_CONTENT = ["application/json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
 
 
 # Password validation
