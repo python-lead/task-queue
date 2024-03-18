@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.conf import settings
 from django.db.utils import IntegrityError
 from rest_framework.test import APITestCase
 
@@ -24,6 +25,9 @@ class ShortURLTestCase(APITestCase):
         self.assertEqual(instance.name, self.valid_data["name"])
         self.assertEqual(instance.url, self.valid_data["url"])
         self.assertIsNotNone(instance.url_squid)
+        self.assertEqual(
+            instance.short_url, f"{settings.BACKEND_HOST}/{instance.url_squid}/"
+        )
 
     def test_save_instance_with_existing_squid(self):
         instance = self.model(**self.valid_data, url_squid=self.short_url.url_squid)

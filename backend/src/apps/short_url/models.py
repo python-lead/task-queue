@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from django.conf import settings
 from django.db import models
 
@@ -16,7 +18,7 @@ class ShortURL(models.Model):
 
     @property
     def short_url(self):
-        return f"{settings.BACKEND_HOST}/{self.url_squid}"
+        return f"{urlparse(settings.BACKEND_HOST).geturl()}/{self.url_squid}/"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
