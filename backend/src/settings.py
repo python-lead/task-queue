@@ -76,10 +76,26 @@ WSGI_APPLICATION = "src.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.environ["POSTGRES_HOST"],
+        "CONN_MAX_AGE": 100,
     }
 }
+
+# REDIS CONFIGURATION
+REDIS_HOST = os.environ["REDIS_HOST"]
+REDIS_PORT = os.environ["REDIS_PORT"]
+
+# CELERY CONFIGURATION
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
+CELERY_RESULT_BACKEND = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
 
 
 # Password validation

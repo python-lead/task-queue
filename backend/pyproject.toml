@@ -9,6 +9,9 @@ readme = "README.md"
 python = "^3.11"
 ipython = "^8.22.2"
 isort = {extras = ["black"], version = "^5.13.2"}
+psycopg2 = "^2.9.9"
+redis = "^5.0.3"
+celery = "^5.3.6"
 
 [tool.poetry.group.dev.dependencies]
 django = "4.2"
