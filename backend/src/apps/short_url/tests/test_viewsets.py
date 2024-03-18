@@ -38,6 +38,15 @@ class ShorURLViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         create_short_url_mock.delay.assert_called()
 
+    @mock.patch("src.apps.short_url.views.create_short_url")
+    def test_create_shortened_url_existing_url(self, create_short_url_mock):
+        response = self.client.post(
+            self.url_list, {"name": "Name", "url": self.short_url.url}
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIsNotNone(response.data.get("url"))
+        create_short_url_mock.delay.assert_not_called()
+
     @mock.patch("src.apps.short_url.views.update_short_url")
     def test_update_shortened_url(self, update_short_url_mock):
         update_data = {"name": "new", "url": "https://new.com/"}
