@@ -12,6 +12,10 @@ isort = {extras = ["black"], version = "^5.13.2"}
 psycopg2 = "^2.9.9"
 redis = "^5.0.3"
 celery = "^5.3.6"
+djangorestframework = "^3.15.0"
+djangorestframework-camel-case = "^1.4.2"
+drf-spectacular = "^0.27.1"
+factory-boy = "^3.3.0"
 
 [tool.poetry.group.dev.dependencies]
 django = "4.2"
