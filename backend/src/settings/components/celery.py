@@ -1,4 +1,7 @@
 # REDIS CONFIGURATION
+import os
+import sys
+
 REDIS_HOST = os.environ["REDIS_HOST"]
 REDIS_PORT = os.environ["REDIS_PORT"]
 
